@@ -4,12 +4,13 @@ import { siteConfig } from "@/lib/site-config";
 import { ConsentManager } from "@/components/ConsentManager";
 
 export const metadata: Metadata = {
-  title: "Managed IT Services in Michigan | Northline Technology",
+  title: "Michigan IT Partner for Managed & Co-Managed IT | Northline Technology",
   description: "Managed IT services in Michigan with cybersecurity, cloud migration, help desk, backup and recovery, and strategic technology guidance.",
   metadataBase: new URL(siteConfig.url),
+  icons: { icon: "/favicon.svg" },
   alternates: { canonical: "/" },
-  openGraph: { title: "Managed IT Services in Michigan | Northline Technology", description: "Reliable managed IT, cybersecurity, cloud, and support for Michigan businesses.", url: "/", siteName: "Northline Technology", type: "website", images: ["/og.png"] },
-  twitter: { card: "summary_large_image", title: "Managed IT Services in Michigan | Northline Technology", description: "Reliable managed IT, cybersecurity, cloud, and support for Michigan businesses.", images: ["/og.png"] },
+  openGraph: { title: "Michigan IT Partner for Managed & Co-Managed IT | Northline Technology", description: "Managed IT services in Michigan with cybersecurity, cloud migration, help desk, backup and recovery, and strategic technology guidance.", url: "/", siteName: "Northline Technology", type: "website", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", title: "Michigan IT Partner for Managed & Co-Managed IT | Northline Technology", description: "Managed IT services in Michigan with cybersecurity, cloud migration, help desk, backup and recovery, and strategic technology guidance.", images: ["/og.png"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

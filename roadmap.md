@@ -4,11 +4,12 @@
 
 - Audited SEO, GEO, marketing, conversion, and content architecture.
 - Implemented canonical service routes, quality-gated city hubs, booking and form scaffolding, consent-aware analytics hooks, and rendered-output tests.
+- Added full-site SEO/GEO release gates and representative browser audits.
 
 ## In Progress
 
+- Preparing the implementation for repository review.
 - Preparing approved content and production integrations.
-- Awaiting production publishing authorization.
 
 ## Still To Do
 

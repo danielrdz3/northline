@@ -5,7 +5,7 @@ import { BookingLink, ChatLauncher } from "@/components/ConversionPanel";
 
 export function SiteHeader() {
   return <header className="header">
-    <Link className="brand" href="/" aria-label="Northline Technology home"><span className="brandMark">N</span><span>NORTHLINE<small>TECHNOLOGY</small></span></Link>
+    <Link className="brand" href="/"><span className="brandMark" aria-hidden="true">N</span><span>NORTHLINE<small>TECHNOLOGY</small></span></Link>
     <nav className="nav serviceNav" aria-label="Main navigation">
       <Link href="/services/managed-it-michigan/">MANAGED IT</Link>
       <Link href="/services/co-managed-it-michigan/">CO-MANAGED IT</Link>

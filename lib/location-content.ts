@@ -15,7 +15,7 @@ export const locationContent = new Map<string, LocationContent>(
     {
       city,
       indexable: false,
-      summary: `Northline helps organizations in ${city} evaluate managed IT, co-managed support, cybersecurity, cloud, continuity, and employee support needs. A local page becomes indexable only after its information has been reviewed for accuracy and usefulness.`,
+      summary: `Northline helps organizations in ${city} evaluate managed IT, co-managed support, cybersecurity, cloud, continuity, and employee support needs.`,
       faq: [
         {
           question: `Can Northline support organizations in ${city}?`,

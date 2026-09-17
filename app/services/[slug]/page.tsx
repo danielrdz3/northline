@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServicePage } from "@/components/ServicePage";
 import { locationServices, serviceBySlug } from "@/lib/location-services";
+import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 
 export function generateStaticParams() { return locationServices.map((service) => ({ slug: service.slug })); }
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!service) return {};
   const title = `${service.name} in Michigan | Northline Technology`;
   const path = `/services/${service.slug}/`;
-  return { title, description: service.intro, alternates: { canonical: path }, openGraph: { title, description: service.intro, url: path, type: "website", images: ["/og.png"] }, twitter: { card: "summary_large_image", title, description: service.intro, images: ["/og.png"] } };
+  return pageMetadata({ title, description: service.intro, path });
 }
 
 export default async function ServiceRoute({ params }: { params: Promise<{ slug: string }> }) {

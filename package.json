@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "NODE_ENV=production next build",
     "start": "next start",
-    "test": "NEXT_PUBLIC_SITE_URL=https://northlinetechnology.com npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "NEXT_PUBLIC_SITE_URL=https://northlinetechnology.com npm run build && node --test tests/*.test.mjs",
+    "test:seo": "NEXT_PUBLIC_SITE_URL=https://northlinetechnology.com npm run build && node --test tests/seo-geo-audit.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
   },

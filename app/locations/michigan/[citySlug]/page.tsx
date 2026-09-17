@@ -6,6 +6,7 @@ import { SiteFooter, SiteHeader } from "@/components/SiteShell";
 import { locationServices } from "@/lib/location-services";
 import { locationContent } from "@/lib/location-content";
 import { michiganCities, slugify } from "@/lib/locations";
+import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 
 export function generateStaticParams() { return michiganCities.map((city) => ({ citySlug: slugify(city) })); }
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ citySlug:
   const location = locationContent.get(citySlug);
   if (!location) return {};
   const path = `/locations/michigan/${citySlug}/`;
-  return { title: `IT Services in ${location.city}, Michigan | Northline Technology`, description: location.summary, alternates: { canonical: path }, robots: location.indexable ? { index: true, follow: true } : { index: false, follow: true }, openGraph: { title: `IT Services in ${location.city}, Michigan | Northline Technology`, description: location.summary, url: path, type: "website", images: ["/og.png"] } };
+  return pageMetadata({ title: `IT Services in ${location.city}, Michigan | Northline Technology`, description: location.summary, path, noIndex: !location.indexable });
 }
 
 export default async function CityPage({ params }: { params: Promise<{ citySlug: string }> }) {
