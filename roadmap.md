@@ -8,6 +8,7 @@
 ## In Progress
 
 - Preparing approved content and production integrations.
+- Awaiting production publishing authorization.
 
 ## Still To Do
 
