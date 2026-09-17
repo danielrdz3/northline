@@ -6,6 +6,7 @@
 - Implemented canonical service routes, quality-gated city hubs, booking and form scaffolding, consent-aware analytics hooks, and rendered-output tests.
 - Added full-site SEO/GEO release gates and representative browser audits.
 - Published the implementation for repository review without changing the production branch.
+- Corrected tablet and mobile navigation behavior and added a responsive regression test.
 
 ## In Progress
 

@@ -3,16 +3,27 @@ import { locationServices } from "@/lib/location-services";
 import { siteConfig } from "@/lib/site-config";
 import { BookingLink, ChatLauncher } from "@/components/ConversionPanel";
 
+const primaryNavigation = [
+  ["MANAGED IT", "/services/managed-it-michigan/"],
+  ["CO-MANAGED IT", "/services/co-managed-it-michigan/"],
+  ["SECURITY", "/services/cybersecurity-michigan/"],
+  ["INSIGHTS", "/insights/"],
+] as const;
+
 export function SiteHeader() {
   return <header className="header">
     <Link className="brand" href="/"><span className="brandMark" aria-hidden="true">N</span><span>NORTHLINE<small>TECHNOLOGY</small></span></Link>
     <nav className="nav serviceNav" aria-label="Main navigation">
-      <Link href="/services/managed-it-michigan/">MANAGED IT</Link>
-      <Link href="/services/co-managed-it-michigan/">CO-MANAGED IT</Link>
-      <Link href="/services/cybersecurity-michigan/">SECURITY</Link>
-      <Link href="/insights/">INSIGHTS</Link>
+      {primaryNavigation.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}
       <Link className="navCta" href="/booking/">BOOK A CONVERSATION</Link>
     </nav>
+    <details className="mobileNav">
+      <summary><span className="menuIcon" aria-hidden="true"><i /><i /><i /></span><span>MENU</span></summary>
+      <nav aria-label="Mobile navigation">
+        {primaryNavigation.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}
+        <Link className="navCta" href="/booking/">BOOK A CONVERSATION</Link>
+      </nav>
+    </details>
   </header>;
 }
 

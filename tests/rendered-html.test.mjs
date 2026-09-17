@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const readOutput = (path) => readFile(new URL(`../out/${path}`, import.meta.url), "utf8");
@@ -41,4 +41,17 @@ test("publishes booking and legal routes with safe integration fallbacks", async
   assert.match(booking, /Book a conversation/i);
   assert.match(privacy, /optional analytics/i);
   assert.match(terms, /production-readiness placeholder/i);
+});
+
+test("switches the header to an accessible menu before navigation links can wrap", async () => {
+  const [home, cssFiles] = await Promise.all([
+    readOutput("index.html"),
+    readdir(new URL("../out/_next/static/css/", import.meta.url)),
+  ]);
+  const css = (await Promise.all(cssFiles.filter((file) => file.endsWith(".css")).map((file) => readOutput(`_next/static/css/${file}`)))).join("\n");
+
+  assert.match(home, /<details class="mobileNav">/);
+  assert.match(home, /<summary><span class="menuIcon"/);
+  assert.match(home, /aria-label="Mobile navigation"/);
+  assert.match(css, /@media\s*\(max-width:1120px\).*?\.serviceNav\{display:none\}.*?\.mobileNav\{display:block/s);
 });
