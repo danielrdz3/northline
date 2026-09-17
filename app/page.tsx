@@ -1,88 +1,25 @@
-"use client";
-
-import { useState } from "react";
-
-const serviceBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
-const services = [
-  { icon: "▦", slug: "managed-it-michigan", title: "Managed IT Services", copy: "Complete, proactive technology support with predictable pricing and a team that knows your business." },
-  { icon: "☁", slug: "cloud-migration-michigan", title: "Cloud Migration", copy: "A clear path to the cloud, planned and managed end-to-end without disrupting your work." },
-  { icon: "⌾", slug: "cybersecurity-michigan", title: "Cybersecurity", copy: "Layered protection, 24/7 monitoring, and practical guidance that keeps risk under control." },
-  { icon: "◎", slug: "penetration-testing-michigan", title: "Penetration Testing", copy: "Real-world security testing that finds exploitable weaknesses and turns the results into a practical remediation plan." },
-  { icon: "↻", slug: "backup-recovery-michigan", title: "Backup & Recovery", copy: "Resilient backups and rapid recovery plans designed to keep your organization moving." },
-  { icon: "◉", slug: "help-desk-michigan", title: "Help Desk Support", copy: "Friendly, responsive support from experienced engineers—whenever your people need it." },
-  { icon: "◖", slug: "voice-collaboration-michigan", title: "Voice & Collaboration", copy: "Modern cloud calling, meetings, and collaboration tools that connect every team." },
-];
+import Link from "next/link";
+import { BookingLink } from "@/components/ConversionPanel";
+import { SiteFooter, SiteHeader } from "@/components/SiteShell";
+import { locationServices } from "@/lib/location-services";
+import { insights } from "@/lib/insights";
 
 const faqs = [
-  ["What should Michigan businesses look for in an IT partner?", "Look for a team that combines responsive support, proactive monitoring, strong cybersecurity, infrastructure expertise, and long-term planning. The right partner improves business outcomes—not just ticket counts."],
-  ["Do you support organizations with an internal IT team?", "Yes. Our co-managed model adds specialist expertise, escalation capacity, cybersecurity coverage, and project support while your internal team stays in control."],
-  ["How do you approach cybersecurity and compliance?", "We begin with risk, then build practical layers of protection around people, devices, networks, cloud services, monitoring, and policy. We also help teams prepare for common industry frameworks."],
-  ["Can you help with cloud, continuity, and recovery?", "Yes. We plan cloud migrations, resilient infrastructure, backups, and recovery processes together so modernization never comes at the cost of uptime or recoverability."],
+  ["What is the difference between managed IT and co-managed IT?", "Managed IT gives an organization one accountable partner for ongoing technology operations. Co-managed IT complements an internal team with capacity, specialized expertise, and clear shared responsibilities."],
+  ["How do we begin evaluating an IT partner?", "Start with the business outcomes, current risks, support needs, and systems that matter most. A productive first conversation should clarify the appropriate next step, not force a one-size-fits-all package."],
+  ["Can cybersecurity be part of an ongoing IT relationship?", "Yes. Security should be integrated into support, identity, devices, infrastructure, cloud services, continuity, and regular planning instead of treated as a one-time purchase."],
 ];
 
 export default function Home() {
-  const [menu, setMenu] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  return (
-    <main>
-      <header className="header">
-        <a className="brand" href="#top" aria-label="Northline Technology home"><span className="brandMark">N</span><span>NORTHLINE<small>TECHNOLOGY</small></span></a>
-        <button className="menuButton" onClick={() => setMenu(!menu)} aria-label="Toggle navigation">☰</button>
-        <nav className={menu ? "nav navOpen" : "nav"} aria-label="Main navigation">
-          <a href="#services">IT Services</a><a href="#security">Security</a><a href="#why">Why Northline</a><a href="#insights">Insights</a>
-          <a className="navCta" href="#contact">CONTACT US</a>
-        </nav>
-      </header>
-
-      <section className="hero" id="top">
-        <div className="heroGlow" />
-        <div className="heroContent">
-          <p className="eyebrow">MICHIGAN MANAGED IT SERVICES</p>
-          <h1>Managed IT Services in Michigan</h1>
-          <p className="heroCopy">We measure IT success by business outcomes—not technical metrics. Productive employees, reliable systems, managed risk, and confident decisions are the real scorecard.</p>
-          <div className="actions"><a className="button primary" href="#contact">TALK TO AN EXPERT <b>→</b></a><a className="button ghost" href="#services">EXPLORE SERVICES</a></div>
-        </div>
-        <div className="heroPanel" aria-hidden="true"><div className="orb"><span>24/7</span><small>PROACTIVE<br/>PROTECTION</small></div></div>
-        <div className="proofBar">
-          <div><b>SECURITY FIRST</b><span>Enterprise-grade protection</span></div>
-          <div><b>24/7 SUPPORT</b><span>Always here for you</span></div>
-          <div><b>CLOUD READY</b><span>Infrastructure that scales</span></div>
-          <div><b>STRATEGIC GUIDANCE</b><span>Decisions aligned to business</span></div>
-        </div>
-      </section>
-
-      <section className="section intro" id="services">
-        <div className="sectionLead"><p className="eyebrow orange">WHAT WE OFFER</p><h2>Serious technology expertise.<br/>Refreshingly simple service.</h2></div>
-        <div className="introCopy"><p>From daily support to long-term technology planning, we give Michigan organizations one accountable team for the systems that matter most.</p><a href="#contact">TALK TO AN EXPERT →</a></div>
-        <div className="serviceGrid">
-          {services.map((s) => <article className="serviceCard" key={s.title}><span className="serviceIcon">{s.icon}</span><h3>{s.title}</h3><p>{s.copy}</p><a href={`${serviceBasePath}/${s.slug}`} aria-label={`Learn about ${s.title}`}>LEARN MORE <b>→</b></a></article>)}
-        </div>
-      </section>
-
-      <section className="why" id="why">
-        <div className="whyImage"><div className="experience"><strong>40+</strong><span>YEARS OF<br/>EXPERIENCE</span></div></div>
-        <div className="whyContent"><p className="eyebrow orange">WHY CHOOSE US</p><h2>Your technology decisions are business decisions.</h2><p>Most providers deliver a standard stack. We start with where your business is going, then build a practical technology roadmap to support it.</p>
-          <ul><li><i>✓</i><span><b>Proven solutions</b><small>Reliable tools chosen for your real-world needs</small></span></li><li><i>✓</i><span><b>Clear, accountable support</b><small>Real people, responsive service, no finger-pointing</small></span></li><li><i>✓</i><span><b>Plans shaped around you</b><small>Technology aligned to your goals and budget</small></span></li><li><i>✓</i><span><b>Built-in strategy</b><small>Senior guidance for every important decision</small></span></li></ul>
-        </div>
-      </section>
-
-      <section className="numbers" id="security"><div><strong>99.9%</strong><span>CLIENT UPTIME TARGET</span></div><div><strong>&lt;15m</strong><span>PRIORITY RESPONSE GOAL</span></div><div><strong>24/7</strong><span>MONITORING & ALERTING</span></div><div><strong>1</strong><span>ACCOUNTABLE PARTNER</span></div></section>
-
-      <section className="section testimonial"><p className="eyebrow orange">CLIENT EXPERIENCE</p><h2>Trusted by Michigan business leaders</h2><blockquote>“Northline made technology feel manageable again. Their team communicates clearly, solves problems quickly, and always connects the work back to our business.”</blockquote><p className="attribution"><b>OPERATIONS DIRECTOR</b><span>Michigan professional services firm</span></p></section>
-
-      <section className="section insights" id="insights"><div className="sectionHeader"><div><p className="eyebrow orange">PRACTICAL INSIGHTS</p><h2>Ideas for a more resilient business</h2></div><a href="#contact">VIEW ALL ARTICLES →</a></div><div className="articleGrid">
-        <article><div className="articleImage cloud"/><p>STRATEGY · 7 MIN READ</p><h3>How to build a technology roadmap people can actually use</h3><a href="#contact">READ ARTICLE →</a></article>
-        <article><div className="articleImage security"/><p>SECURITY · 5 MIN READ</p><h3>Five practical ways to reduce cyber risk this quarter</h3><a href="#contact">READ ARTICLE →</a></article>
-        <article><div className="articleImage hybrid"/><p>CLOUD · 6 MIN READ</p><h3>When a hybrid cloud approach makes business sense</h3><a href="#contact">READ ARTICLE →</a></article>
-      </div></section>
-
-      <section className="section faq"><div><p className="eyebrow orange">MANAGED IT FAQ</p><h2>Managed IT questions from Michigan businesses</h2><p>What leaders typically ask when comparing support models, cybersecurity, and long-term technology partners.</p></div><div className="faqList">{faqs.map(([q,a], i) => <article key={q} className={openFaq === i ? "faqItem open" : "faqItem"}><button onClick={() => setOpenFaq(openFaq === i ? null : i)}><span>{String(i+1).padStart(2,"0")}</span><h3>{q}</h3><b>{openFaq === i ? "−" : "+"}</b></button><p>{a}</p></article>)}</div></section>
-
-      <section className="cta" id="contact"><p className="eyebrow">GET STARTED TODAY</p><h2>Ready for technology that simply works?</h2><p>Tell us what’s getting in the way. We’ll help you find a clear, practical next step.</p><a className="button light" href="mailto:hello@northlinetechnology.com">SCHEDULE A CONVERSATION <b>→</b></a></section>
-
-      <footer><div className="footerBrand"><a className="brand" href="#top"><span className="brandMark">N</span><span>NORTHLINE<small>TECHNOLOGY</small></span></a><p>Michigan-based managed technology services focused on clear outcomes, resilient systems, and dependable support.</p></div><div><b>SERVICES</b><a href={`${serviceBasePath}/managed-it-michigan`}>Managed IT</a><a href={`${serviceBasePath}/cybersecurity-michigan`}>Cybersecurity</a><a href={`${serviceBasePath}/penetration-testing-michigan`}>Penetration Testing</a><a href={`${serviceBasePath}/cloud-migration-michigan`}>Cloud & Infrastructure</a></div><div><b>COMPANY</b><a href="#why">Why Northline</a><a href="#insights">Insights</a><a href="#contact">Contact</a></div><div><b>CONTACT</b><a href="mailto:hello@northlinetechnology.com">hello@northlinetechnology.com</a><span>Serving businesses across Michigan</span></div><p className="copyright">© 2026 Northline Technology. All rights reserved.</p></footer>
-    </main>
-  );
+  return <main>
+    <SiteHeader />
+    <section className="hero" id="top"><div className="heroGlow" /><div className="heroContent"><p className="eyebrow">MICHIGAN MANAGED IT SERVICES</p><h1>Technology support built around better business decisions.</h1><p className="heroCopy">Northline helps Michigan organizations strengthen daily IT operations, support employees, manage risk, and make the next technology decision with confidence.</p><div className="actions"><BookingLink label="BOOK A CONVERSATION" /><Link className="button ghost" href="/services/managed-it-michigan/">EXPLORE MANAGED IT</Link></div></div></section>
+    <section className="section intro"><div className="sectionLead"><p className="eyebrow orange">TWO WAYS TO WORK TOGETHER</p><h2>One accountable partner. The right level of support.</h2></div><div className="introCopy"><p>Choose a fully managed relationship when you want a team to own day-to-day technology. Choose co-managed IT when an internal team needs added capacity, expertise, or coverage.</p><Link href="/insights/managed-it-vs-co-managed-it/">COMPARE THE MODELS →</Link></div><div className="serviceGrid"><article className="serviceCard"><span className="serviceIcon">▦</span><h3>Managed IT</h3><p>Ongoing support, proactive operations, security, and planning for organizations that want one accountable technology partner.</p><Link href="/services/managed-it-michigan/">LEARN MORE <b>→</b></Link></article><article className="serviceCard"><span className="serviceIcon">⇄</span><h3>Co-Managed IT</h3><p>Shared support, specialist skills, and clear escalation for internal IT teams that need more capability without giving up control.</p><Link href="/services/co-managed-it-michigan/">LEARN MORE <b>→</b></Link></article><article className="serviceCard"><span className="serviceIcon">⌾</span><h3>Cybersecurity</h3><p>Practical risk reduction across people, identities, devices, cloud services, monitoring, and continuity planning.</p><Link href="/services/cybersecurity-michigan/">LEARN MORE <b>→</b></Link></article></div></section>
+    <section className="why"><div className="whyImage" aria-hidden="true" /><div className="whyContent"><p className="eyebrow orange">HOW NORTHLINE WORKS</p><h2>Clear ownership. Practical progress.</h2><p>Good technology decisions start with the business. Northline works from your priorities, current environment, risks, and budget—not a standard stack.</p><ul><li><i>✓</i><span><b>Understand first</b><small>Clarify what is working, what is exposed, and what matters next.</small></span></li><li><i>✓</i><span><b>Define ownership</b><small>Make support, escalation, and vendor responsibilities clear.</small></span></li><li><i>✓</i><span><b>Improve deliberately</b><small>Turn risks and recurring issues into a practical roadmap.</small></span></li><li><i>✓</i><span><b>Keep decisions connected</b><small>Review technology choices against business outcomes over time.</small></span></li></ul></div></section>
+    <section className="section"><div className="sectionHeader"><div><p className="eyebrow orange">SERVICES</p><h2>Capabilities that support the whole environment.</h2></div><Link href="/locations/michigan/">MICHIGAN SERVICE AREAS →</Link></div><div className="articleGrid">{locationServices.filter((service) => !["managed-it-michigan", "co-managed-it-michigan", "cybersecurity-michigan"].includes(service.slug)).slice(0, 3).map((service) => <article key={service.slug}><p>{service.short.toUpperCase()}</p><h3>{service.name}</h3><p className="articleCopy">{service.intro}</p><Link href={`/services/${service.slug}/`}>EXPLORE SERVICE →</Link></article>)}</div></section>
+    <section className="section insights"><div className="sectionHeader"><div><p className="eyebrow orange">PRACTICAL INSIGHTS</p><h2>Guidance for consequential technology decisions.</h2></div><Link href="/insights/">VIEW ALL INSIGHTS →</Link></div><div className="articleGrid">{insights.map((insight) => <article key={insight.slug}><p>{insight.category.toUpperCase()}</p><h3>{insight.title}</h3><p className="articleCopy">{insight.description}</p><Link href={`/insights/${insight.slug}/`}>READ INSIGHT →</Link></article>)}</div></section>
+    <section className="section faq"><div><p className="eyebrow orange">COMMON QUESTIONS</p><h2>Useful answers before the first conversation.</h2><p>Northline focuses on clear context, practical tradeoffs, and an appropriate next step.</p></div><div className="faqList">{faqs.map(([question, answer]) => <details className="faqItem" key={question}><summary><h3>{question}</h3><b>+</b></summary><p>{answer}</p></details>)}</div></section>
+    <section className="cta"><p className="eyebrow">LET’S TALK</p><h2>Find a useful next step for your technology.</h2><p>Bring the situation you are working through. Northline will help clarify what matters and what to do next.</p><BookingLink className="button light" label="BOOK A CONVERSATION" /></section>
+    <SiteFooter />
+  </main>;
 }
