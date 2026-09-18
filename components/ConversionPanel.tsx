@@ -1,13 +1,17 @@
 "use client";
 
 import Script from "next/script";
+import Link from "next/link";
 import { useState } from "react";
 import { siteConfig } from "@/lib/site-config";
 import { track } from "@/components/ConsentManager";
 
 export function BookingLink({ className = "button primary", label = "BOOK A CONVERSATION" }: { className?: string; label?: string }) {
-  const href = siteConfig.calcomUrl || "/booking/";
-  return <a className={className} href={href} onClick={() => track("booking_view", { placement: "cta" })}>{label} <b>→</b></a>;
+  const onClick = () => track("booking_view", { placement: "cta" });
+  if (siteConfig.calcomUrl) {
+    return <a className={className} href={siteConfig.calcomUrl} onClick={onClick}>{label} <b>→</b></a>;
+  }
+  return <Link className={className} href="/booking/" onClick={onClick}>{label} <b>→</b></Link>;
 }
 
 export function LeadForm() {
